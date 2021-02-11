@@ -14,10 +14,11 @@ public class MessageListener extends ListenerAdapter {
 
         if(event.getAuthor().isBot()) return;
 
-        if(Bot.getInstance().getTimeout().hasTimeout(event.getAuthor().getIdLong()))
+        if(Bot.getInstance().getTimeout(event.getChannel().getIdLong()).hasTimeout(event.getAuthor().getIdLong())) {
             event.getMessage().delete().queue();
-        else
-            Bot.getInstance().getTimeout().setTimeout(event.getAuthor().getIdLong(), event.getMessage().getTimeCreated().toEpochSecond());
+        } else {
+            Bot.getInstance().getTimeout(event.getChannel().getIdLong()).setTimeout(event.getAuthor().getIdLong(), event.getMessage().getTimeCreated().toInstant().toEpochMilli());
+        }
 
     }
 }

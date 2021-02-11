@@ -7,5 +7,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Config {
     private String token;
-    private int timeout;
+    private int timespan;
+    private int messages;
 }

@@ -12,6 +12,8 @@ import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
 
 import javax.security.auth.login.LoginException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -22,10 +24,10 @@ public class Bot {
 
     private Config config;
 
-    private Timeout timeout;
+    private Map<Long, Timeout> timeouts;
 
     private Bot() {
-        timeout = new Timeout();
+        timeouts = new HashMap<>();
         instance = this;
     }
 
@@ -56,6 +58,13 @@ public class Bot {
             new Bot();
 
         return instance;
+    }
+
+    public Timeout getTimeout(Long channelId) {
+        if(!timeouts.containsKey(channelId))
+            timeouts.put(channelId, new Timeout());
+
+        return  timeouts.get(channelId);
     }
 
 }
