@@ -1,4 +1,5 @@
 {
   "token": "BOT TOKEN",
-  "timeout": 20
+  "timespan": 20,
+  "messages": 6
 }
